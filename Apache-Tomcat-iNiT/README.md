@@ -1,5 +1,4 @@
 
-
 <div align="center">
   <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExYm5vaHRnaGpjbXl0M2V2ZGo4Y3E3ZDlua2tmaDZidHVyNTdyazY0NiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/KzJkzjggfGN5Py6nkT/giphy.gif" width="200"/>
 </div>
@@ -38,12 +37,12 @@
 
 # Introduction <img src="https://media.giphy.com/media/WUlplcMpOCEmTGBtBW/giphy.gif" width="30">
 
-Welcome to **Apache-Tomcat-QuickSet**, your go-to solution for effortlessly installing and configuring Apache Tomcat. 
+Welcome to **Apache-Tomcat-iNiT**, your go-to solution for effortlessly installing and configuring Apache Tomcat. 
 
 ## What's Inside?
 
 - **Automated Script**: A robust script that handles the complete installation and setup of Tomcat. Simply execute it and watch your server come to life! 🛠️
-- **Weekly Updates**: The script is updated weekly. A job fetches the latest Tomcat version and updates the `amazonlinux-tomcat.sh`, `ubuntu-tomcat.sh` and `apache-tomcat.sh` file for you. 🌟
+- **Weekly Updates**: The script is updated weekly. A job fetches the latest Tomcat version and updates the  `apache-tomcat.sh` file for you. 🌟
 - **User-Friendly**: Say goodbye to manual setups. Our script ensures a smooth and quick installation process. ⏱️
 - **Ready for Action**: Get straight to coding and deployment with Tomcat fully configured and ready to use! 💻
 
@@ -51,39 +50,21 @@ Welcome to **Apache-Tomcat-QuickSet**, your go-to solution for effortlessly inst
 
 Our scripts support the following environments on AWS:
 
-- **Ubuntu & Amazon Linux**:
-  - `apache-tomcat.sh`: Compatible to Install Tomcat on Amazon Linux, Ubuntu, and RHEL Instance.
-- **Amazon Linux**:
-  - `amazonlinux-tomcat.sh`: Installs Tomcat on an Amazon Linux 2 AMI (HVM).
-- **Ubuntu**:
-  - `ubuntu-tomcat.sh`: Installs Tomcat on an Ubuntu server 22.04 LTS (HVM).
-
-
-## Additional Scripts
-
-- **Remove Tomcat**:
-  - `remove-tomcat.sh`: Uninstalls Tomcat.
-- **Change Password**:
-  - `passwizard-tomcat.sh`: Changes the Tomcat admin password.
-- **Change Port Number**:
-  - `portuner-tomcat.sh`: Changes the Tomcat port number.
+- **Compatible Linux Distributions**:
+  - `Apache-Tomcat.sh`: Compatible to Install Tomcat on Amazon Linux, Ubuntu, CentOS Stream, Debian and RHEL.
+    
 
 ## How to Use
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/tekadesukant/Apache-Tomcat-QuickSet.git
-   cd Apache-Tomcat-QuickSet
+   git clone https://github.com/OpenDevHive/OpenDevOpsHive-SetupKit.git
+   cd OpenDevOpsHive-SetupKit/Apache-Tomcat-iNiT
    ```
 
 2. **Run the desired script:**
    ```bash
-   sh amazonlinux-tomcat.sh  # For Amazon Linux
-   sh apache-tomcat.sh       # For Amazon Linux and Ubuntu
-   sh ubuntu-tomcat.sh       # For Ubuntu
-   sh remove-tomcat.sh       # To remove Tomcat
-   sh passwizard-tomcat.sh   # To change password
-   sh portuner-tomcat.sh     # To change port number
+   sh apache-tomcat.sh       # For Amazon Linux, Ubuntu, CentOS Stream, Debian and RHEL
    ```
 
 ## Integrated Commands
@@ -138,6 +119,6 @@ We've integrated convenient commands to manage Tomcat:
 
 ## Support
 
-If you encounter any issues or have questions, feel free to open an issue on our [GitHub repository](https://github.com/tekadesukant/Apache-Tomcat-QuickSet/issues) or reach out to me.
+If you encounter any issues or have questions, feel free to open an issue on our [GitHub repository](https://github.com/OpenDevHive/OpenDevopsHive-SetupKit/issues) or reach out to me.
 
 Happy coding! 🚀
