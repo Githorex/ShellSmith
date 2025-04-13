@@ -22,7 +22,7 @@
 
 ---
 
-# **Git-Client-iNiT For Windows**
+# **Git-Client For Windows**
 
 Welcome to the Git-Client-iNiT! This repository features an automated script designed to simplify the installation and configuration of your Git client, allowing you to get started with coding quickly and efficiently.
 
