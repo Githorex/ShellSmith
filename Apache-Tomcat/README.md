@@ -44,7 +44,7 @@ Welcome to **Apache-Tomcat-iNiT**, your go-to solution for effortlessly installi
 - **Automated Script**: A robust script that handles the complete installation and setup of Tomcat. Simply execute it and watch your server come to life! 🛠️
 - **Weekly Updates**: The script is updated weekly. A job fetches the latest Tomcat version and updates the  `apache-tomcat.sh` file for you. 🌟
 - **User-Friendly**: Say goodbye to manual setups. Our script ensures a smooth and quick installation process. ⏱️
-- **Ready for Action**: Get straight to coding and deployment with Tomcat fully configured and ready to use! 💻
+- **Ready to Action**: Get straight to coding and deployment with Tomcat fully configured and ready to use! 💻
 
 ## Supported Platforms
 
@@ -58,8 +58,8 @@ Our scripts support the following environments on AWS:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/OpenDevHive/OpenDevOpsHive-SetupKit.git
-   cd OpenDevOpsHive-SetupKit/Apache-Tomcat-iNiT
+   git clone https://github.com/Githorex/ShellSmith.git
+   cd ShellSmith/Apache-Tomcat
    ```
 
 2. **Run the desired script:**
@@ -119,6 +119,6 @@ We've integrated convenient commands to manage Tomcat:
 
 ## Support
 
-If you encounter any issues or have questions, feel free to open an issue on our [GitHub repository](https://github.com/OpenDevHive/OpenDevopsHive-SetupKit/issues) or reach out to me.
+If you encounter any issues or have questions, feel free to open an issue on our [GitHub repository](https://github.com/Githorex/ShellSmith/issues) or reach out to me.
 
 Happy coding! 🚀
