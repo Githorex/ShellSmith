@@ -21,38 +21,36 @@ jobs:
       - name: Install tree (for structure display)
         run: sudo apt-get install tree
 
-      - name: Generate structure markdown
+      - name: Insert updated structure into README
         run: |
-          echo "## ShellSmith Files Structure" > structure.md
-          echo "\`\`\`" >> structure.md
-          tree -a -I '.git|node_modules|__pycache__' >> structure.md
-          echo "\`\`\`" >> structure.md
+          # Generate tree output and indent it for markdown
+          STRUCTURE=$(tree -a -I '.git|node_modules|__pycache__' | sed 's/^/    /')
 
-      - name: Insert structure into README
-        run: |
-          # Define the markers
-          START="## ShellSmith Files Structure"
-          END="## "  # Next section or end of file
+          # Inject the tree structure between the markers
+          awk -v struct="$STRUCTURE" '
+            BEGIN {inside=0}
+            /<!-- START STRUCTURE -->/ {
+              print
+              print "```"
+              print struct
+              print "```"
+              inside=1
+              next
+            }
+            /<!-- END STRUCTURE -->/ {
+              inside=0
+              print
+              next
+            }
+            !inside
+          ' README.md > README_TMP.md
 
-          # Split the README into three parts:
-          # 1. Before the structure block
-          # 2. The new structure
-          # 3. After the structure block (if any)
-
-          awk -v s="$START" -v e="$END" '
-            BEGIN {in_block=0}
-            $0 ~ s {print; print "```"; system("tree -a -I \".git|node_modules|__pycache__\""); print "```"; in_block=1; next}
-            in_block && $0 ~ e {in_block=0}
-            !in_block
-          ' README.md > new_readme.md
-
-          mv new_readme.md README.md
-
+          mv README_TMP.md README.md
 
       - name: Commit & push if README changed
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add README.md
-          git diff --cached --quiet || git commit -m "Auto-update README with latest project structure"
+          git diff --cached --quiet || git commit -m "📁 Auto-update README with latest project structure"
           git push
