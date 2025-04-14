@@ -30,8 +30,7 @@ jobs:
 
       - name: Generate project structure
         run: |
-          echo "## Project Structure" > structure.md
-          echo '```' >> structure.md
+          echo '```' > structure.md
           tree -I '.git|node_modules|__pycache__' -a >> structure.md
           echo '```' >> structure.md
 
@@ -40,12 +39,12 @@ jobs:
           # Remove existing project structure block
           awk '
             BEGIN {skip=0}
-            /^## Project Structure/ {skip=1}
-            skip && /^## / && !/^## Project Structure/ {skip=0}
-            !skip || /^## Project Structure/ && !printed++ { print; next }
+            /^## Project Structure/ {print; skip=1; next}
+            skip && /^## / {skip=0}
             !skip
           ' README.md > temp_readme.md
 
+          # Add the new structure section
           cat temp_readme.md structure.md > new_readme.md
           mv new_readme.md README.md
           rm temp_readme.md structure.md
