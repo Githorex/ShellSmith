@@ -1,4 +1,4 @@
-name: Auto Update README with Project Structure
+name: Update README with Project Structure
 
 on:
   push:
@@ -13,44 +13,38 @@ on:
 jobs:
   update-readme:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install tree (for structure display)
-        run: sudo apt-get install tree
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
 
-      - name: Insert updated structure into README
+      - name: Generate project structure
         run: |
-          # Generate tree output and indent it for markdown
-          STRUCTURE=$(tree -a -I '.git|node_modules|__pycache__' | sed 's/^/    /')
+          echo "## Project Structure" > structure.md
+          echo "\`\`\`" >> structure.md
+          tree -I '.git|node_modules|__pycache__' -a >> structure.md
+          echo "\`\`\`" >> structure.md
 
-          # Inject the tree structure between the markers
-          awk -v struct="$STRUCTURE" '
-            BEGIN {inside=0}
-            /<!-- START STRUCTURE -->/ {
-              print
-              print "```"
-              print struct
-              print "```"
-              inside=1
-              next
-            }
-            /<!-- END STRUCTURE -->/ {
-              inside=0
-              print
-              next
-            }
-            !inside
-          ' README.md > README_TMP.md
-
-          mv README_TMP.md README.md
-
-      - name: Commit & push if README changed
+      - name: Update README.md
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          if grep -q "## Project Structure" README.md; then
+            # Replace existing structure block
+            awk '/## Project Structure/{flag=1;print;next}/^## /{flag=0} !flag' README.md > temp_readme.md
+          else
+            cat README.md > temp_readme.md
+          fi
+          cat temp_readme.md structure.md > new_readme.md
+          mv new_readme.md README.md
+          rm temp_readme.md structure.md
+
+      - name: Commit changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add README.md
-          git diff --cached --quiet || git commit -m "📁 Auto-update README with latest project structure"
+          git diff --cached --quiet || git commit -m "Update project structure in README"
           git push
