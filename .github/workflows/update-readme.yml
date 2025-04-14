@@ -22,8 +22,11 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Install tree if missing
-        run: sudo apt-get update && sudo apt-get install -y tree
+      - name: Ensure tree is installed
+        run: |
+          if ! command -v tree &> /dev/null; then
+            sudo apt-get update && sudo apt-get install -y tree
+          fi
 
       - name: Generate project structure
         run: |
@@ -32,18 +35,17 @@ jobs:
           tree -I '.git|node_modules|__pycache__' -a >> structure.md
           echo '```' >> structure.md
 
-      - name: Update README.md
+      - name: Replace old project structure section
         run: |
-          if grep -q "## Project Structure" README.md; then
-            awk '
-              BEGIN {section=0}
-              /^## Project Structure/ {print; section=1; next}
-              /^## / && section {section=0}
-              !section
-            ' README.md > temp_readme.md
-          else
-            cat README.md > temp_readme.md
-          fi
+          # Remove existing project structure block
+          awk '
+            BEGIN {skip=0}
+            /^## Project Structure/ {skip=1}
+            skip && /^## / && !/^## Project Structure/ {skip=0}
+            !skip || /^## Project Structure/ && !printed++ { print; next }
+            !skip
+          ' README.md > temp_readme.md
+
           cat temp_readme.md structure.md > new_readme.md
           mv new_readme.md README.md
           rm temp_readme.md structure.md
