@@ -30,14 +30,24 @@ jobs:
 
       - name: Insert structure into README
         run: |
-          if grep -q "## ShellSmith Files Structure" README.md; then
-            awk '/## Project Structure/{flag=1;print;next}/^## /{flag=0} !flag' README.md > temp_readme.md
-          else
-            cat README.md > temp_readme.md
-          fi
-          cat temp_readme.md structure.md > new_readme.md
+          # Define the markers
+          START="## ShellSmith Files Structure"
+          END="## "  # Next section or end of file
+
+          # Split the README into three parts:
+          # 1. Before the structure block
+          # 2. The new structure
+          # 3. After the structure block (if any)
+
+          awk -v s="$START" -v e="$END" '
+            BEGIN {in_block=0}
+            $0 ~ s {print; print "```"; system("tree -a -I \".git|node_modules|__pycache__\""); print "```"; in_block=1; next}
+            in_block && $0 ~ e {in_block=0}
+            !in_block
+          ' README.md > new_readme.md
+
           mv new_readme.md README.md
-          rm temp_readme.md structure.md
+
 
       - name: Commit & push if README changed
         run: |
