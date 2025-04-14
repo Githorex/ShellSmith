@@ -57,12 +57,12 @@ Follow these steps to use the `InstallGit.bat` script:
    ```
 
 3. **Shortcut:**
-   - Download the InstallGit.bat script and just double tab/click on it.
+   - Please download the InstallGit.bat script and double-click it to execute.
 
 
 ## **Feedback & Support**
 
-For any issues or feedback, please feel free to reach out through the [GitHub Issues page](https://github.com/OpenDevHive/OpenDevOpsHive-SetupKit/issues). Your input is valuable for improving this tool.
+For any issues or feedback, please feel free to reach out through the [GitHub Issues page](https://github.com/Githorex/ShellSmith/issues). Your input is valuable for improving this tool.
 
 
 
