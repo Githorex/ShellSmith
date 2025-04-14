@@ -1,0 +1,48 @@
+name: Auto Update README with Project Structure
+
+on:
+  push:
+    paths:
+      - '**'
+      - '!README.md'
+  pull_request:
+    paths:
+      - '**'
+      - '!README.md'
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install tree (for structure display)
+        run: sudo apt-get install tree
+
+      - name: Generate structure markdown
+        run: |
+          echo "## Project Structure" > structure.md
+          echo "\`\`\`" >> structure.md
+          tree -a -I '.git|node_modules|__pycache__' >> structure.md
+          echo "\`\`\`" >> structure.md
+
+      - name: Insert structure into README
+        run: |
+          if grep -q "## Project Structure" README.md; then
+            awk '/## Project Structure/{flag=1;print;next}/^## /{flag=0} !flag' README.md > temp_readme.md
+          else
+            cat README.md > temp_readme.md
+          fi
+          cat temp_readme.md structure.md > new_readme.md
+          mv new_readme.md README.md
+          rm temp_readme.md structure.md
+
+      - name: Commit & push if README changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git diff --cached --quiet || git commit -m "Auto-update README with latest project structure"
+          git push
