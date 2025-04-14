@@ -12,8 +12,7 @@
 │   ├── InstallGit.bat
 │   └── README.md
 ├── README.md
-├── structure.md
-└── test2.txt
+└── structure.md
 
-5 directories, 9 files
+5 directories, 8 files
 ```
