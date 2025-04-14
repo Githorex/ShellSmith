@@ -30,8 +30,9 @@
 │   ├── InstallGit.bat
 │   └── README.md
 ├── README.md
+├── new_readme.md
 ├── structure.md
 └── tempfile.txt
 
-5 directories, 9 files
+5 directories, 10 files
 ```
