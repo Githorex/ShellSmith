@@ -1,5 +1,3 @@
-
-## Project Structure
 ## Project Structure
 ```
 .
