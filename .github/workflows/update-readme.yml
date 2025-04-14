@@ -30,7 +30,7 @@ jobs:
 
       - name: Insert structure into README
         run: |
-          if grep -q "## Project Structure" README.md; then
+          if grep -q "## ShellSmith Files Structure" README.md; then
             awk '/## Project Structure/{flag=1;print;next}/^## /{flag=0} !flag' README.md > temp_readme.md
           else
             cat README.md > temp_readme.md
