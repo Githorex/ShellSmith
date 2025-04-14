@@ -1,5 +1,5 @@
 
-## Project Structure
+##  ShellSmith Files Structure
 ```
 .
 ├── .github
